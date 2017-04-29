@@ -35,3 +35,11 @@ jspm_packages
 
 # Optional REPL history
 .node_repl_history
+.idea/mis-typescript-game.iml
+.idea/misc.xml
+*.xml
+.idea/typescript-compiler.xml
+*.xml
+.idea/vcs.xml
+*.xml
+.idea/typescript-compiler.xml

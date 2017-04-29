@@ -4,16 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="main.css" type="text/css">
     <title>Document</title>
 </head>
 <body>
-    <style>
-        div{
-            background-color: black;
-            width: 50px;
-            height: 50px;
-        }
-    </style>
-    <div id="app"></div>
+    <div id="A-1" style="display: none">
+        <h1>My Game</h1>
+        <hr>
+        <label>Your name :</label>
+        <input type="text" id="name" class="form-control">
+        <label>Difficulty</label>
+        <select id="difficulty">
+            <option value="0">Easy</option>
+            <option value="1">Normal</option>
+            <option value="2">Hard</option>
+        </select>
+        <button id="newstart">Start</button>
+    </div>
+    <div id="A-2" style="display: none">
+        <h1>Welcome </h1>
+        <hr>
+        <span>Welcome</span>
+        <span id="playerName"> Muhammed Kamal </span> <br>
+        <span> Selected Difficulty is </span>
+        <span id="playerDifficulty"> Hard </span> <br>
+        <button id="forgetMe">Forget me</button> <br>
+        <button id="startAgian">Start</button>
+    </div>
+    <div id="B-1">
+        <div id="game">
+
+        </div>
+        <span>Score : </span>
+        <span id="score">14</span> <br>
+        <span>Missed green boxes : </span>
+        <span id="missedBoxes"> 3 </span>
+    </div>
+    <div id="C-1">
+        <span></span>
+    </div>
+    <script src="main.js"></script>
 </body>
 </html>
