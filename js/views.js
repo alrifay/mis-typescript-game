@@ -93,7 +93,6 @@ var B1 = (function (_super) {
         return _this;
     }
     B1.prototype.addBox = function (box) {
-        console.log(this.game.clientWidth);
         box.obj.style.left = Math.round(Math.random() * (this.game.clientWidth - game.getInstanse().size)) + "px";
         this.game.appendChild(box.obj);
         box.move();

@@ -106,7 +106,6 @@ class B1 extends view {
     }
 
     public addBox(box: box) {
-        console.log(this.game.clientWidth);
         box.obj.style.left = Math.round(Math.random() * (this.game.clientWidth - game.getInstanse().size)) + "px";
         this.game.appendChild(box.obj);
         box.move();
