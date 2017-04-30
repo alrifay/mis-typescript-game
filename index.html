@@ -11,53 +11,68 @@
 </head>
 
 <body>
-    <div id="A-1" style="display: none">
-        <h1>My Game</h1>
-        <hr>
-        <div id="A-1-1">
-            <label>Your name :</label>
-            <input type="text" id="name" class="input form-control" placeholder="Enter your Name">
-            <label>Difficulty</label>
-            <select id="difficulty" class="form-control selcls">
+<div id="A-1" style="display: none">
+    <h1>My Game</h1>
+    <hr>
+    <div id="A-1-1">
+        <label>Your name :</label>
+        <input type="text" id="name" class="input form-control" placeholder="Enter your Name">
+        <label>Difficulty</label>
+        <select id="difficulty" class="form-control selcls">
             <optgroup label="Level">
-            <option value="0">Easy</option>
-            <option value="1">Normal</option>
-            <option value="2">Hard</option>
+                <option value="0">Easy</option>
+                <option value="1">Normal</option>
+                <option value="2">Hard</option>
             </optgroup>
         </select>
-            <button id="newStart" class="btn btn-primary">Start</button>
-        </div>
+        <button id="newStart" class="btn btn-primary">Start</button>
     </div>
-    <div id="A-2">
-        <h1>Welcome </h1>
-        <hr>
-        <span>Welcome</span>
-        <span id="playerName"> Muhammed Kamal </span> <br>
-        <span> Selected Difficulty is </span>
-        <span id="playerDifficulty"> Hard </span> <br>
-        <button id="forgetMe">Forget me</button> <br>
-        <button id="startAgian">Start</button>
-    </div>
-    <div id="B-1" style="display: none">
-        <div id="game">
-
-        </div>
-        <span>Score : </span>
-        <span id="score">14</span> <br>
-        <span>Missed green boxes : </span>
-        <span id="missedBoxes"> 3 </span>
-    </div>
-    <div id="C-1" style="display: none">
-        <h1>My Game</h1>
-        <hr>
-    </div>
-    <div id="C-2" style="display: none">
-        <h1>My Game</h1>
-        <hr>
+</div>
+<div id="A-2" style="display: none">
+    <h1>Welcome </h1>
+    <hr>
+    <span>Welcome</span>
+    <span id="playerName"> Muhammed Kamal </span> <br>
+    <span> Selected Difficulty is </span>
+    <span id="playerDifficulty"> Hard </span> <br>
+    <button id="forgetMe">Forget me</button>
+    <br>
+    <button id="startAgian">Start</button>
+</div>
+<div id="B-1" style="display: none">
+    <div id="game">
 
     </div>
-    <script src="classes.js"></script>
-    <script src="views.js"></script>
+    <span>Score : </span>
+    <span id="score">14</span> <br>
+    <span>Missed green boxes : </span>
+    <span id="missedBoxes"> 3 </span>
+</div>
+<div id="C-1" style="display: none">
+    <h1>My Game</h1>
+    <hr>
+    <p><span id="player">Kamal</span>
+        ! , You got a new high score ! </p>
+    <br>
+    <span id="highScore">2500</span>
+    <button id="playAgain">Play Again</button>
+</div>
+<div id="C-2">
+    <h1>My Game</h1>
+    <hr>
+    <p>
+        <span id="loserName">kamal</span>
+        !, You Lost.
+    </p>
+    <p>
+        current score : <span id="current-Score">2500</span>
+        High score : <span id="High-Score">3000</span>
+    </p>
+    <button id="play-again">Play Again</button>
+
+</div>
+<script src="classes.js"></script>
+<script src="views.js"></script>
 </body>
 
 </html>
