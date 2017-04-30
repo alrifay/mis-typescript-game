@@ -1,0 +1,13 @@
+{
+    "compileOnSave": true,
+    "compilerOptions": {
+        "target": "es5",
+        "watch": true
+    },
+    "include": [
+        "./**/*.ts"
+    ],
+    "typeAcquisition": {
+        "enable": true
+    }
+}
