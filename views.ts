@@ -1,10 +1,23 @@
 /// <reference path="classes.ts" />
-
 /**
  * A1
  */
-class A1 {
-    private view: HTMLElement;
+class view {
+    view: HTMLDivElement;
+
+    constructor(id: string) {
+        this.view = <HTMLDivElement> document.getElementById(id);
+    }
+
+    hide() {
+        this.view.style.display = 'none';
+    }
+
+    show() {
+        this.view.style.display = 'block';
+    }
+}
+class A1 extends view {
     private name: HTMLInputElement;
     private difficulty: HTMLSelectElement;
     private newStart: HTMLButtonElement;
@@ -18,19 +31,11 @@ class A1 {
     }
 
     private constructor() {
-        this.view = document.getElementById('A-1');
+        super("A-1");
         this.name = <HTMLInputElement>document.getElementById('name');
         this.difficulty = <HTMLSelectElement>document.getElementById('difficulty');
         this.newStart = <HTMLButtonElement>document.getElementById('newStart');
         this.newStart.onclick = () => this.newStartClick();
-    }
-
-    hide() {
-        this.view.style.display = 'none';
-    }
-
-    show() {
-        this.view.style.display = 'block';
     }
 
     newStartClick() {
@@ -40,3 +45,48 @@ class A1 {
 
 }
 
+class A2 extends view {
+    playerName: HTMLSpanElement;
+    playerDifficulty: HTMLSpanElement;
+    forgetMe: HTMLButtonElement;
+    startAgian: HTMLButtonElement;
+    private static instance: A2;
+
+    private constructor() {
+        super("A-2");
+        this.playerName = <HTMLSpanElement> document.getElementById("playerName");
+        this.playerDifficulty = <HTMLSpanElement> document.getElementById("playerDifficulty");
+        this.forgetMe = <HTMLButtonElement> document.getElementById("forgetMe");
+        this.startAgian = <HTMLButtonElement> document.getElementById("startAgian");
+        this.forgetMe.onclick = () => this.forgetMeClick();
+        this.startAgian.onclick = () => this.startAgianClick();
+    }
+
+    public static getInstance() {
+        if (!this.instance) {
+            this.instance = new A2();
+        }
+        return this.instance;
+    }
+
+    forgetMeClick() {
+        document.cookie = null;
+        this.hide();
+        A1.getInstance().show();
+    }
+
+    startAgianClick() {
+        this.hide();
+    }
+
+}
+
+class B1 extends view {
+    game : HTMLDivElement;
+    score : HTMLSpanElement;
+    missedBoxes : HTMLSpanElement;
+    private static instance : B1;
+    private constructor(){
+        super("B-1");
+    }
+}
