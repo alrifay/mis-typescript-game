@@ -9,18 +9,22 @@
     <title>Document</title>
 </head>
 <body>
-    <div id="A-1" style="display: none">
+    <div id="A-1">
         <h1>My Game</h1>
         <hr>
+        <div id="A-1-1">
         <label>Your name :</label>
-        <input type="text" id="name" class="form-control">
+        <input type="text" id="name" class="input form-control" placeholder="Enter your Name">
         <label>Difficulty</label>
-        <select id="difficulty">
+        <select id="difficulty" class="form-control selcls">
+            <optgroup label="Level">
             <option value="0">Easy</option>
             <option value="1">Normal</option>
             <option value="2">Hard</option>
+            </optgroup>
         </select>
-        <button id="newstart">Start</button>
+        <button id="newstart" class="btn btn-primary">Start</button>
+        </div>
     </div>
     <div id="A-2" style="display: none">
         <h1>Welcome </h1>
@@ -32,7 +36,7 @@
         <button id="forgetMe">Forget me</button> <br>
         <button id="startAgian">Start</button>
     </div>
-    <div id="B-1">
+    <div id="B-1" style="display: none">
         <div id="game">
 
         </div>
@@ -42,7 +46,13 @@
         <span id="missedBoxes"> 3 </span>
     </div>
     <div id="C-1">
-        <span></span>
+        <h1>My Game</h1>
+        <hr>
+    </div>
+    <div id="C-2">
+        <h1>My Game</h1>
+        <hr>
+
     </div>
     <script src="main.js"></script>
 </body>
