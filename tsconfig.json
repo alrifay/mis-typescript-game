@@ -2,10 +2,11 @@
     "compileOnSave": true,
     "compilerOptions": {
         "target": "es5",
-        "watch": true
+        "watch": true,
+        "outDir": "./js"
     },
     "include": [
-        "./**/*.ts"
+        "./ts/*.ts"
     ],
     "typeAcquisition": {
         "enable": true
