@@ -97,6 +97,18 @@ class B1 extends view {
         this.missedBoxes = <HTMLSpanElement> document.getElementById("missedBoxes");
     }
 
+    public addBox(box : box)
+    {
+        box.obj.style.left = Math.round(Math.random()*450) + "px";
+        this.game.appendChild(box.obj);
+        box.move();
+    }
+
+    public removeBox(box : box)
+    {
+        this.game.removeChild(box.obj);
+    }
+
     public static getInstance() {
         if (!this.instance) {
             this.instance = new B1();

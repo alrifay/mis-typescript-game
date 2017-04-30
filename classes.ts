@@ -19,7 +19,7 @@ enum level {
 
 abstract class box {
     obj: any;//HTMLDivElement;
-
+    position : number = 0;
 
     constructor(length: number, action:any) {
         this.obj = document.createElement('div');
@@ -35,7 +35,19 @@ abstract class box {
         this.obj.style.height=length+"px";
     }
 
-
+    move()
+    {
+        let id = setInterval(() => {
+            if (this.position == 450) {
+                clearInterval(id);
+            }
+            else
+            {
+                this.position += 10;
+                this.obj.style.top = this.position +"px";
+            }
+        },10);
+    }
 }
 
 class greenBox extends box {
@@ -105,14 +117,33 @@ class game {
     player: user;
     boxes: box[];
     rate: number;
-
+    private static Instanse:game;
+    private constructor() {
+        this.rate = 10;
+        this.size = 50;
+    }
+    static getInstanse()
+    {
+        if(!game.Instanse)
+        {
+            game.Instanse = new game();
+        }
+        return game.Instanse;
+    }
     main() {
         this.player = this.getCookie();
         if (this.player) {
             // A-2
+            A2.getInstance().show();
         } else {
             // A-1
         }
+    }
+
+    start()
+    {
+        this.generateBox();
+
     }
 
     generateBox()
@@ -127,6 +158,7 @@ class game {
         }else {
             this.generateGreenBox();
         }
+        B1.getInstance().addBox(this.boxes[this.boxes.length-1]);
     }
 
     getCookie() {
@@ -143,27 +175,27 @@ class game {
     }
 
     generateGreenBox() {
-        let box =new greenBox(50,()=>{
+        let box =new greenBox(this.size,()=>{
             console.log("green");
         });
         this.boxes.push(box);
     }
 
     generateBrownBox() {
-        let box =new greenBox(50,()=>{
+        let box =new brownBox(this.size,()=>{
             console.log("brown");
         });
         this.boxes.push(box);
     }
 
     generateRedBox() {
-        let box =new greenBox(50,()=>{
+        let box =new redBox(this.size,()=>{
             console.log("red");
         });
         this.boxes.push(box);
     }
     generateBlueBox() {
-        let box =new greenBox(50,()=>{
+        let box =new blueBox(this.size,()=>{
             console.log("blue");
         });
         this.boxes.push(box);
@@ -172,4 +204,4 @@ class game {
 
 }
 
-new game().generateBox();
+//new game().generateBox();
