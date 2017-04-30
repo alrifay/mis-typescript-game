@@ -52,6 +52,7 @@ class A1 extends view {
 class A2 extends view {
     playerName: HTMLSpanElement;
     playerDifficulty: HTMLSpanElement;
+    highestScore: HTMLSpanElement;
     forgetMe: HTMLButtonElement;
     startAgian: HTMLButtonElement;
     private static instance: A2;
@@ -60,17 +61,19 @@ class A2 extends view {
         super("A-2");
         this.playerName = <HTMLSpanElement>document.getElementById("playerName");
         this.playerDifficulty = <HTMLSpanElement>document.getElementById("playerDifficulty");
+        this.highestScore = <HTMLSpanElement>document.getElementById("highestScore");
         this.forgetMe = <HTMLButtonElement>document.getElementById("forgetMe");
         this.startAgian = <HTMLButtonElement>document.getElementById("startAgian");
         this.forgetMe.onclick = () => this.forgetMeClick();
         this.startAgian.onclick = () => this.startAgianClick();
     }
 
-    public static getInstance(player : user) {
+    public static getInstance(player: user) {
         if (!this.instance) {
             this.instance = new A2();
         }
         A2.instance.playerName.textContent = player.name;
+        A2.instance.highestScore.textContent = player.highestScore + '';
         A2.instance.playerDifficulty.textContent = level[player.difficult];
         return this.instance;
     }
@@ -103,7 +106,6 @@ class B1 extends view {
     }
 
     public addBox(box: box) {
-        console.info('kamal');
         box.obj.style.left = Math.round(Math.random() * 450) + "px";
         this.game.appendChild(box.obj);
         box.move();
@@ -143,7 +145,7 @@ class C1 extends view {
         this.playAgain.onclick = () => this.playAgainClick();
     }
 
-    public static getInstance(playerName : user ) {
+    public static getInstance(playerName: user) {
         if (!this.instance) {
             this.instance = new C1();
         }
@@ -166,7 +168,6 @@ class C2 extends view {
     private static instance: C2;
 
     private constructor() {
-        console.log("sdaasdsa");
         super("C-2");
         this.loserName = <HTMLSpanElement>document.getElementById("loserName");
         this.currentScore = <HTMLSpanElement>document.getElementById("current-Score");
@@ -175,11 +176,10 @@ class C2 extends view {
         this.playagain.onclick = () => this.playAgainClick();
     }
 
-    public static getInstance(player : user , currentScore : number) {
+    public static getInstance(player: user, currentScore: number) {
         if (!this.instance) {
             this.instance = new C2();
         }
-        console.log("sdaasdsa2");
         this.instance.loserName.textContent = player.name;
         this.instance.currentScore.textContent = currentScore + '';
         this.instance.highScore.textContent = player.highestScore + '';

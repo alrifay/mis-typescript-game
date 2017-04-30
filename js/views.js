@@ -55,6 +55,7 @@ var A2 = (function (_super) {
         var _this = _super.call(this, "A-2") || this;
         _this.playerName = document.getElementById("playerName");
         _this.playerDifficulty = document.getElementById("playerDifficulty");
+        _this.highestScore = document.getElementById("highestScore");
         _this.forgetMe = document.getElementById("forgetMe");
         _this.startAgian = document.getElementById("startAgian");
         _this.forgetMe.onclick = function () { return _this.forgetMeClick(); };
@@ -66,6 +67,7 @@ var A2 = (function (_super) {
             this.instance = new A2();
         }
         A2.instance.playerName.textContent = player.name;
+        A2.instance.highestScore.textContent = player.highestScore + '';
         A2.instance.playerDifficulty.textContent = level[player.difficult];
         return this.instance;
     };
@@ -91,7 +93,6 @@ var B1 = (function (_super) {
         return _this;
     }
     B1.prototype.addBox = function (box) {
-        console.info('kamal');
         box.obj.style.left = Math.round(Math.random() * 450) + "px";
         this.game.appendChild(box.obj);
         box.move();
@@ -142,9 +143,7 @@ var C1 = (function (_super) {
 var C2 = (function (_super) {
     __extends(C2, _super);
     function C2() {
-        var _this = this;
-        console.log("sdaasdsa");
-        _this = _super.call(this, "C-2") || this;
+        var _this = _super.call(this, "C-2") || this;
         _this.loserName = document.getElementById("loserName");
         _this.currentScore = document.getElementById("current-Score");
         _this.highScore = document.getElementById("High-Score");
@@ -156,7 +155,6 @@ var C2 = (function (_super) {
         if (!this.instance) {
             this.instance = new C2();
         }
-        console.log("sdaasdsa2");
         this.instance.loserName.textContent = player.name;
         this.instance.currentScore.textContent = currentScore + '';
         this.instance.highScore.textContent = player.highestScore + '';
