@@ -1,3 +1,5 @@
+/// <reference path="views.ts" />
+
 /**
  * Created by mohamedkamal on 4/30/2017.
  */
@@ -40,30 +42,41 @@ class box {
 
 class user {
     name: string;
-    difficult : level;
+    difficult: level;
     highestScore: number;
-    constructor(name : string,difficult : level , highestScore : number){
+    constructor(name: string, difficult: level, highestScore: number) {
         this.name = name;
         this.difficult = difficult;
         this.highestScore = highestScore;
     }
-    Cookie(){
-        document.cookie = JSON.stringify({name : this.name , highestScore : this.highestScore , difficult : this.difficult });
+    Cookie() {
+        document.cookie = JSON.stringify({ name: this.name, highestScore: this.highestScore, difficult: this.difficult });
     }
 }
 
 class game {
     score: number;
     speed: number;
-    missed : number;
-    size : number;
-}
+    missed: number;
+    size: number;
+    player: user;
+    boxes: box[];
 
-function getCookie(){
-    if (document.cookie){
-        let cookie = JSON.parse(document.cookie);
-        let player  = new user(cookie.name , cookie.difficult ,cookie.highestScore);
-        return player;
+    main() {
+        this.player = this.getCookie();
+        if (this.player) {
+            // A-2
+        } else {
+            // A-1
+        }
     }
-    return null;
+
+    getCookie() {
+        if (document.cookie) {
+            let cookie = JSON.parse(document.cookie);
+            let player = new user(cookie.name, cookie.difficult, cookie.highestScore);
+            return player;
+        }
+        return null;
+    }
 }
