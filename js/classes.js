@@ -170,11 +170,9 @@ var game = (function () {
     game.prototype.main = function () {
         this.player = this.getCookie();
         if (this.player) {
-            console.info('player exist');
             A2.getInstance(this.player).show();
         }
         else {
-            console.info('player does not exist');
             A1.getInstance().show();
         }
     };
@@ -203,8 +201,6 @@ var game = (function () {
             this.boxes.pop().remove();
         }
         B1.getInstance().hide();
-        console.log(this.player.highestScore);
-        console.log(this.score);
         if (this.score >= this.player.highestScore) {
             this.player.highestScore = this.score;
             document.cookie = JSON.stringify(this.player);
@@ -245,21 +241,15 @@ var game = (function () {
         this.boxes.push(box);
     };
     game.prototype.generateBrownBox = function () {
-        var box = new brownBox(this.size, function () {
-            console.log("brown");
-        });
+        var box = new brownBox(this.size, function () { });
         this.boxes.push(box);
     };
     game.prototype.generateRedBox = function () {
-        var box = new redBox(this.size, function () {
-            console.log("red");
-        });
+        var box = new redBox(this.size, function () { });
         this.boxes.push(box);
     };
     game.prototype.generateBlueBox = function () {
-        var box = new blueBox(this.size, function () {
-            console.log("blue");
-        });
+        var box = new blueBox(this.size, function () { });
         this.boxes.push(box);
     };
     Object.defineProperty(game.prototype, "missed", {

@@ -152,10 +152,8 @@ class game {
     main() {
         this.player = this.getCookie();
         if (this.player) {
-            console.info('player exist');
             A2.getInstance(this.player).show();
         } else {
-            console.info('player does not exist');
             A1.getInstance().show();
         }
     }
@@ -182,8 +180,6 @@ class game {
             this.boxes.pop().remove();
         }
         B1.getInstance().hide();
-        console.log(this.player.highestScore);
-        console.log(this.score);
         if (this.score >= this.player.highestScore)
         {
             this.player.highestScore = this.score;
@@ -226,22 +222,16 @@ class game {
     }
 
     generateBrownBox() {
-        let box = new brownBox(this.size, () => {
-            console.log("brown");
-        });
+        let box = new brownBox(this.size, () => {});
         this.boxes.push(box);
     }
 
     generateRedBox() {
-        let box = new redBox(this.size, () => {
-            console.log("red");
-        });
+        let box = new redBox(this.size, () => {});
         this.boxes.push(box);
     }
     generateBlueBox() {
-        let box = new blueBox(this.size, () => {
-            console.log("blue");
-        });
+        let box = new blueBox(this.size, () => {});
         this.boxes.push(box);
     }
 

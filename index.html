@@ -7,32 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="css/main.css" type="text/css">
-    <title>Document</title>
-    <style>
-        .container {
-            box-shadow: 1px 1px 10px rosybrown;
-            padding: 15px;
-            margin: 1em auto;
-            width: 500px;
-            height: 600px;
-            position: relative;
-            background-color: rgba(100, 100, 100, 0.1)
-        }
-
-        hr {
-            border-color: #aaa;
-            border-radius: 50%;
-            margin-bottom: 50px;
-        }
-
-        #game {
-            width: 500px;
-            height: 500px;
-            position: relative;
-            overflow: hidden;
-            border: 5px dashed royalblue;
-        }
-    </style>
+    <title>Mis typescript game :D</title>
 </head>
 
 <body>
@@ -57,44 +32,34 @@
             <button id="newStart" class="btn btn-primary btn-block btn-lg">Start</button>
         </div>
         <div id="A-2" style="display: none">
-            <h1>Welcome </h1>
+            <h1 class="text-center">Welcome</h1>
             <hr>
-            <span>Welcome</span>
-            <span id="playerName"></span><br>
-            <span>Selected Difficulty is </span>
-            <span id="playerDifficulty"></span> <br>
-            <button id="forgetMe">Forget me</button>
-            <br>
-            <button id="startAgian">Start</button>
+            <p class="text-center">Welcome <span id="playerName">d</span> !</p>
+            <p class="text-center">Selected diffculty is <span id="playerDifficulty"></span></p>
+            <p class="text-center">High Score : <span id="highestScore"></span></p>
+            <button id="forgetMe" class="btn btn-warning btn-block btn-lg">Forget Me</button>
+            <button id="startAgian" class="btn btn-primary btn-block btn-lg">Start</button>
         </div>
         <div id="B-1" style="display: none">
-            <div id="game">
-
-            </div>
-            <span>Score : </span>
-            <span id="score">0</span> <br>
-            <span>Missed green boxes : </span>
-            <span id="missedBoxes"> 0 </span>
+            <div id="game"></div>
+            <p>Score : <span id="score">0</span></p>
+            <p>Missed green boxes : <span id="missedBoxes">0</span></p>
         </div>
         <div id="C-1" style="display: none">
             <h1>My Game</h1>
             <hr>
-            <p><span id="player"></span> ! , You got a new high score ! </p>
+            <p><span id="player"></span>!, You got a new high score!</p>
             <br>
-            <span id="highScore"></span>
-            <button id="playAgain">Play Again</button>
+            <p><span id="highScore"></span></p>
+            <button id="playAgain" class="btn btn-primary btn-block btn-lg">Play Again</button>
         </div>
         <div id="C-2" style="display: none">
             <h1>My Game</h1>
             <hr>
-            <p>
-                <span id="loserName"></span> !, You Lost.
-            </p>
-            <p>
-                current score : <span id="current-Score"></span> High score : <span id="High-Score"></span>
-            </p>
-            <button id="play-again">Play Again</button>
-
+            <p><span id="loserName"></span>!, You Lost.</p>
+            <p>current score : <span id="current-Score"></span></p>
+            <p>High score : <span id="High-Score"></span></p>
+            <button id="play-again" class="btn btn-primary btn-block btn-lg">Play Again</button>
         </div>
     </div>
     <script src="js/classes.js"></script>
