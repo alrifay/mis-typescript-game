@@ -100,10 +100,10 @@ class blueBox extends box {
     }
 
     action(game: game) {
-        game.size += game.rate;
-        game.boxes.forEach(box => {
-            box.length = game.size;
-        });
+            game.size += game.rate;
+            game.boxes.forEach(box => {
+                box.length = game.size;
+            });
         this.remove();
     }
 }
