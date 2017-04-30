@@ -66,10 +66,12 @@ class A2 extends view {
         this.startAgian.onclick = () => this.startAgianClick();
     }
 
-    public static getInstance() {
+    public static getInstance(player : user) {
         if (!this.instance) {
             this.instance = new A2();
         }
+        A2.instance.playerName.textContent = player.name;
+        A2.instance.playerDifficulty.textContent = level[player.difficult];
         return this.instance;
     }
 
@@ -115,10 +117,15 @@ class B1 extends view {
         if (!this.instance) {
             this.instance = new B1();
         }
+        /*this.instance.score.textContent = "0";
+        this.instance.missedBoxes.textContent = "0";*/
         return this.instance;
     }
     setScore(score: number) {
         this.score.textContent = score + '';
+    }
+    setMissed(missedBoxes: number) {
+        this.missedBoxes.textContent = missedBoxes + '';
     }
 }
 
@@ -159,6 +166,7 @@ class C2 extends view {
     private static instance: C2;
 
     private constructor() {
+        console.log("sdaasdsa");
         super("C-2");
         this.loserName = <HTMLSpanElement>document.getElementById("loserName");
         this.currentScore = <HTMLSpanElement>document.getElementById("current-Score");
@@ -171,6 +179,7 @@ class C2 extends view {
         if (!this.instance) {
             this.instance = new C2();
         }
+        console.log("sdaasdsa2");
         this.instance.loserName.textContent = player.name;
         this.instance.currentScore.textContent = currentScore + '';
         this.instance.highScore.textContent = player.highestScore + '';
