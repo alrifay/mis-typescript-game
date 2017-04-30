@@ -17,6 +17,7 @@ class view {
         this.view.style.display = 'block';
     }
 }
+
 class A1 extends view {
     private name: HTMLInputElement;
     private difficulty: HTMLSelectElement;
@@ -41,6 +42,8 @@ class A1 extends view {
     newStartClick() {
         let player = new user(this.name.value, parseInt(this.difficulty.value), 0);
         player.Cookie();
+        this.hide();
+        //B1.getInstance();
     }
 
 }
@@ -82,11 +85,78 @@ class A2 extends view {
 }
 
 class B1 extends view {
-    game : HTMLDivElement;
-    score : HTMLSpanElement;
-    missedBoxes : HTMLSpanElement;
-    private static instance : B1;
-    private constructor(){
+    game: HTMLDivElement;
+    score: HTMLSpanElement;
+    missedBoxes: HTMLSpanElement;
+    private static instance: B1;
+
+    private constructor() {
         super("B-1");
+        this.game = <HTMLDivElement> document.getElementById("game");
+        this.score = <HTMLSpanElement> document.getElementById("score");
+        this.missedBoxes = <HTMLSpanElement> document.getElementById("missedBoxes");
+    }
+
+    public static getInstance() {
+        if (!this.instance) {
+            this.instance = new B1();
+        }
+        return this.instance;
+    }
+}
+
+class C1 extends view {
+    player: HTMLSpanElement;
+    highScore: HTMLSpanElement;
+    playAgain: HTMLButtonElement;
+    private static instance: C1;
+
+    private constructor() {
+        super("C-1");
+        this.player = <HTMLSpanElement> document.getElementById("player");
+        this.highScore = <HTMLSpanElement> document.getElementById("highScore");
+        this.playAgain = <HTMLButtonElement> document.getElementById("playAgain");
+        this.playAgain.onclick = () => this.playAgainClick();
+    }
+
+    public static getInstance() {
+        if (!this.instance) {
+            this.instance = new C1();
+        }
+        return this.instance;
+    }
+
+    playAgainClick() {
+        this.hide();
+        location.reload();
+    }
+}
+
+class C2 extends view {
+    loserName: HTMLSpanElement;
+    currentScore: HTMLSpanElement;
+    highScore: HTMLSpanElement;
+    playagain: HTMLButtonElement;
+    private static instance: C2;
+
+    private constructor() {
+        super("C-2");
+        this.loserName = <HTMLSpanElement> document.getElementById("loserName");
+        this.currentScore = <HTMLSpanElement> document.getElementById("current-Score");
+        this.highScore = <HTMLSpanElement> document.getElementById("High-Score");
+        this.playagain = <HTMLButtonElement> document.getElementById("play-again");
+        this.playagain.onclick = () => this.playAgainClick();
+    }
+
+    public static getInstance() {
+        if (!this.instance) {
+            this.instance = new C2();
+        }
+        return this.instance;
+    }
+
+    playAgainClick() {
+        this.hide();
+        location.reload();
     }
 }
