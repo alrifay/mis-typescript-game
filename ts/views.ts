@@ -106,7 +106,8 @@ class B1 extends view {
     }
 
     public addBox(box: box) {
-        box.obj.style.left = Math.round(Math.random() * 450) + "px";
+        console.log(this.game.clientWidth);
+        box.obj.style.left = Math.round(Math.random() * (this.game.clientWidth - game.getInstanse().size)) + "px";
         this.game.appendChild(box.obj);
         box.move();
     }
@@ -119,12 +120,10 @@ class B1 extends view {
         if (!this.instance) {
             this.instance = new B1();
         }
-        /*this.instance.score.textContent = "0";
-        this.instance.missedBoxes.textContent = "0";*/
         return this.instance;
     }
     setScore(score: number) {
-        this.score.textContent = score + '';
+        this.score.textContent = score + 1 + '';
     }
     setMissed(missedBoxes: number) {
         this.missedBoxes.textContent = missedBoxes + '';

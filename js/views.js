@@ -93,7 +93,8 @@ var B1 = (function (_super) {
         return _this;
     }
     B1.prototype.addBox = function (box) {
-        box.obj.style.left = Math.round(Math.random() * 450) + "px";
+        console.log(this.game.clientWidth);
+        box.obj.style.left = Math.round(Math.random() * (this.game.clientWidth - game.getInstanse().size)) + "px";
         this.game.appendChild(box.obj);
         box.move();
     };
@@ -104,12 +105,10 @@ var B1 = (function (_super) {
         if (!this.instance) {
             this.instance = new B1();
         }
-        /*this.instance.score.textContent = "0";
-        this.instance.missedBoxes.textContent = "0";*/
         return this.instance;
     };
     B1.prototype.setScore = function (score) {
-        this.score.textContent = score + '';
+        this.score.textContent = score + 1 + '';
     };
     B1.prototype.setMissed = function (missedBoxes) {
         this.missedBoxes.textContent = missedBoxes + '';

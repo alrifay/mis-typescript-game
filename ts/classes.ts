@@ -3,12 +3,6 @@
 /**
  * Deleted by Mohamed Al-Rifay on 4/30/2017.
  */
-enum boxType {
-    plusOne,
-    danger,
-    increase,
-    decrease
-}
 
 enum level {
     easy,
@@ -41,7 +35,7 @@ abstract class box {
 
     move() {
         this.id = setInterval(() => {
-            if (this.position == 450) {
+            if (this.position >= (B1.getInstance().game.clientHeight - box.length)) {
                 clearInterval(this.id);
                 this.remove();
                 if (this instanceof greenBox) {
@@ -49,7 +43,7 @@ abstract class box {
                 }
             }
             else {
-                this.position += 1;
+                this.position += game.getInstanse().moveSpace;
                 this.obj.style.top = this.position + "px";
             }
         }, 10);
@@ -133,6 +127,8 @@ class user {
 class game {
     score: number;
     speed: number;
+    moveSpace : number;
+    moveSpaceInt : number;
     miss: number;
     size: number;
     player: user;
@@ -163,6 +159,7 @@ class game {
         this.size = 50;
         this.score = 0;
         this.miss = 0;
+        this.moveSpace = 1;
         this.boxes = [];
         if (this.player.difficult == level.easy) {
             this.speed = 1200;
@@ -172,10 +169,14 @@ class game {
             this.speed = 600;
         }
         this.IntervalId = setInterval(() => this.generateBox(), this.speed);
+        this.moveSpaceInt = setInterval(()=> {
+            this.moveSpace +=1;
+        },15000);
     }
 
     endGame() {
         clearInterval(this.IntervalId);
+        clearInterval(this.moveSpaceInt);
         for (var i = 0; i < this.boxes.length; i++) {
             this.boxes.pop().remove();
         }

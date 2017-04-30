@@ -12,13 +12,6 @@ var __extends = (this && this.__extends) || (function () {
 /**
  * Deleted by Mohamed Al-Rifay on 4/30/2017.
  */
-var boxType;
-(function (boxType) {
-    boxType[boxType["plusOne"] = 0] = "plusOne";
-    boxType[boxType["danger"] = 1] = "danger";
-    boxType[boxType["increase"] = 2] = "increase";
-    boxType[boxType["decrease"] = 3] = "decrease";
-})(boxType || (boxType = {}));
 var level;
 (function (level) {
     level[level["easy"] = 0] = "easy";
@@ -49,7 +42,7 @@ var box = (function () {
     box.prototype.move = function () {
         var _this = this;
         this.id = setInterval(function () {
-            if (_this.position == 450) {
+            if (_this.position >= (B1.getInstance().game.clientHeight - box.length)) {
                 clearInterval(_this.id);
                 _this.remove();
                 if (_this instanceof greenBox) {
@@ -57,7 +50,7 @@ var box = (function () {
                 }
             }
             else {
-                _this.position += 1;
+                _this.position += game.getInstanse().moveSpace;
                 _this.obj.style.top = _this.position + "px";
             }
         }, 10);
@@ -183,6 +176,7 @@ var game = (function () {
         this.size = 50;
         this.score = 0;
         this.miss = 0;
+        this.moveSpace = 1;
         this.boxes = [];
         if (this.player.difficult == level.easy) {
             this.speed = 1200;
@@ -194,9 +188,13 @@ var game = (function () {
             this.speed = 600;
         }
         this.IntervalId = setInterval(function () { return _this.generateBox(); }, this.speed);
+        this.moveSpaceInt = setInterval(function () {
+            _this.moveSpace += 1;
+        }, 15000);
     };
     game.prototype.endGame = function () {
         clearInterval(this.IntervalId);
+        clearInterval(this.moveSpaceInt);
         for (var i = 0; i < this.boxes.length; i++) {
             this.boxes.pop().remove();
         }
