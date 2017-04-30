@@ -136,10 +136,12 @@ class C1 extends view {
         this.playAgain.onclick = () => this.playAgainClick();
     }
 
-    public static getInstance() {
+    public static getInstance(playerName : user ) {
         if (!this.instance) {
             this.instance = new C1();
         }
+        this.instance.player.textContent = playerName.name;
+        this.instance.highScore.textContent = playerName.highestScore + '';
         return this.instance;
     }
 
@@ -165,10 +167,13 @@ class C2 extends view {
         this.playagain.onclick = () => this.playAgainClick();
     }
 
-    public static getInstance() {
+    public static getInstance(player : user , currentScore : number) {
         if (!this.instance) {
             this.instance = new C2();
         }
+        this.instance.loserName.textContent = player.name;
+        this.instance.currentScore.textContent = currentScore + '';
+        this.instance.highScore.textContent = player.highestScore + '';
         return this.instance;
     }
 

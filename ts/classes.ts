@@ -182,6 +182,10 @@ class game {
             this.boxes.pop().remove();
         }
         B1.getInstance().hide();
+        if (this.score >= this.player.highestScore)
+            C1.getInstance(this.player).show();
+        else
+            C2.getInstance(this.player,this.score);
     }
 
     getCookie() {
