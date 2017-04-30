@@ -1,3 +1,4 @@
+/// <reference path="views.ts" />
 /**
  * Created by mohamedkamal on 4/30/2017.
  */
@@ -54,13 +55,22 @@ var user = (function () {
 var game = (function () {
     function game() {
     }
+    game.prototype.main = function () {
+        this.player = this.getCookie();
+        if (this.player) {
+            // A-2
+        }
+        else {
+            // A-1
+        }
+    };
+    game.prototype.getCookie = function () {
+        if (document.cookie) {
+            var cookie = JSON.parse(document.cookie);
+            var player = new user(cookie.name, cookie.difficult, cookie.highestScore);
+            return player;
+        }
+        return null;
+    };
     return game;
 }());
-function getCookie() {
-    if (document.cookie) {
-        var cookie = JSON.parse(document.cookie);
-        var player = new user(cookie.name, cookie.difficult, cookie.highestScore);
-        return player;
-    }
-    return null;
-}
