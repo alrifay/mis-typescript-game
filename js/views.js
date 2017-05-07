@@ -41,11 +41,15 @@ var A1 = (function (_super) {
         return A1.instance;
     };
     A1.prototype.newStartClick = function () {
-        var player = new user(this.name.value, parseInt(this.difficulty.value), 0);
-        player.Cookie();
-        this.hide();
-        B1.getInstance().show();
-        game.getInstanse().start();
+        if (/^([a-zA-Z][a-z A-Z]+)$/.test(this.name.value)) {
+            var player = new user(this.name.value, parseInt(this.difficulty.value), 0);
+            player.Cookie();
+            this.hide();
+            B1.getInstance().show();
+            game.getInstanse().start();
+        }
+        else
+            alert("error");
     };
     return A1;
 }(view));

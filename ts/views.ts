@@ -40,11 +40,14 @@ class A1 extends view {
     }
 
     newStartClick() {
+        if(/^([a-zA-Z][a-z A-Z]+)$/.test(this.name.value)){
         let player = new user(this.name.value, parseInt(this.difficulty.value), 0);
         player.Cookie();
         this.hide();
         B1.getInstance().show();
         game.getInstanse().start();
+    }else
+    alert("error");
     }
 
 }
