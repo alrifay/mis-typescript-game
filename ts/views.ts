@@ -30,6 +30,8 @@ class A1 extends view {
             A1.instance = new A1();
         }
         A1.instance.errorMessage.style.display = "none";
+        A1.instance.name.value = "";
+        A1.instance.difficulty.value = "0";
         return A1.instance;
     }
 

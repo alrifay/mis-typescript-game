@@ -1,8 +1,13 @@
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 /// <reference path="classes.ts" />
 /**
  * views
@@ -22,19 +27,21 @@ var view = (function () {
 var A1 = (function (_super) {
     __extends(A1, _super);
     function A1() {
-        var _this = this;
-        _super.call(this, "A-1");
-        this.name = document.getElementById('name');
-        this.difficulty = document.getElementById('difficulty');
-        this.newStart = document.getElementById('newStart');
-        this.errorMessage = document.getElementById('errorMessage');
-        this.newStart.onclick = function () { return _this.newStartClick(); };
+        var _this = _super.call(this, "A-1") || this;
+        _this.name = document.getElementById('name');
+        _this.difficulty = document.getElementById('difficulty');
+        _this.newStart = document.getElementById('newStart');
+        _this.errorMessage = document.getElementById('errorMessage');
+        _this.newStart.onclick = function () { return _this.newStartClick(); };
+        return _this;
     }
     A1.getInstance = function () {
         if (!A1.instance) {
             A1.instance = new A1();
         }
         A1.instance.errorMessage.style.display = "none";
+        A1.instance.name.value = "";
+        A1.instance.difficulty.value = "0";
         return A1.instance;
     };
     A1.prototype.newStartClick = function () {
@@ -55,15 +62,15 @@ var A1 = (function (_super) {
 var A2 = (function (_super) {
     __extends(A2, _super);
     function A2() {
-        var _this = this;
-        _super.call(this, "A-2");
-        this.playerName = document.getElementById("playerName");
-        this.playerDifficulty = document.getElementById("playerDifficulty");
-        this.highestScore = document.getElementById("highestScore");
-        this.forgetMe = document.getElementById("forgetMe");
-        this.startAgain = document.getElementById("startAgain");
-        this.forgetMe.onclick = function () { return _this.forgetMeClick(); };
-        this.startAgain.onclick = function () { return _this.startAgainClick(); };
+        var _this = _super.call(this, "A-2") || this;
+        _this.playerName = document.getElementById("playerName");
+        _this.playerDifficulty = document.getElementById("playerDifficulty");
+        _this.highestScore = document.getElementById("highestScore");
+        _this.forgetMe = document.getElementById("forgetMe");
+        _this.startAgain = document.getElementById("startAgain");
+        _this.forgetMe.onclick = function () { return _this.forgetMeClick(); };
+        _this.startAgain.onclick = function () { return _this.startAgainClick(); };
+        return _this;
     }
     A2.getInstance = function (player) {
         if (!this.instance) {
@@ -90,10 +97,11 @@ var A2 = (function (_super) {
 var B1 = (function (_super) {
     __extends(B1, _super);
     function B1() {
-        _super.call(this, "B-1");
-        this.game = document.getElementById("game");
-        this.score = document.getElementById("score");
-        this.missedBoxes = document.getElementById("missedBoxes");
+        var _this = _super.call(this, "B-1") || this;
+        _this.game = document.getElementById("game");
+        _this.score = document.getElementById("score");
+        _this.missedBoxes = document.getElementById("missedBoxes");
+        return _this;
     }
     B1.prototype.addBox = function (box) {
         box.obj.style.left = Math.round(Math.random() * (this.game.clientWidth - game.getInstanse().size)) + "px";
@@ -124,12 +132,12 @@ var B1 = (function (_super) {
 var C1 = (function (_super) {
     __extends(C1, _super);
     function C1() {
-        var _this = this;
-        _super.call(this, "C-1");
-        this.player = document.getElementById("player");
-        this.highScore = document.getElementById("highScore");
-        this.playAgain = document.getElementById("playAgain");
-        this.playAgain.onclick = function () { return _this.playAgainClick(); };
+        var _this = _super.call(this, "C-1") || this;
+        _this.player = document.getElementById("player");
+        _this.highScore = document.getElementById("highScore");
+        _this.playAgain = document.getElementById("playAgain");
+        _this.playAgain.onclick = function () { return _this.playAgainClick(); };
+        return _this;
     }
     C1.getInstance = function (playerName) {
         if (!this.instance) {
@@ -148,13 +156,13 @@ var C1 = (function (_super) {
 var C2 = (function (_super) {
     __extends(C2, _super);
     function C2() {
-        var _this = this;
-        _super.call(this, "C-2");
-        this.loserName = document.getElementById("loserName");
-        this.currentScore = document.getElementById("current-Score");
-        this.highScore = document.getElementById("High-Score");
-        this.playagain = document.getElementById("play-again");
-        this.playagain.onclick = function () { return _this.playAgainClick(); };
+        var _this = _super.call(this, "C-2") || this;
+        _this.loserName = document.getElementById("loserName");
+        _this.currentScore = document.getElementById("current-Score");
+        _this.highScore = document.getElementById("High-Score");
+        _this.playagain = document.getElementById("play-again");
+        _this.playagain.onclick = function () { return _this.playAgainClick(); };
+        return _this;
     }
     C2.getInstance = function (player, currentScore) {
         if (!this.instance) {

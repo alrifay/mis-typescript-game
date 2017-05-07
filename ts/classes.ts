@@ -14,12 +14,9 @@ abstract class box {
     obj: HTMLDivElement;
     position: number = 0;
     id: number;
-    constructor(length: number, action: any) {
+    constructor(length: number) {
         this.obj = document.createElement('div');
-        this.obj.onclick = () => {
-            action();
-            this.action(game.getInstanse());
-        };
+        this.obj.onclick = () => this.action(game.getInstanse());
         this.length = length;
         this.obj.style.backgroundColor = this.Color;
         this.obj.style.position = 'absolute';
@@ -49,8 +46,8 @@ abstract class box {
     }
     remove() {
         clearInterval(this.id);
-        if(this.obj)
-        this.obj.remove();
+        if (this.obj)
+            this.obj.remove();
     }
 }
 
@@ -62,6 +59,7 @@ class greenBox extends box {
 
     action(game: game) {
         game.score += 1;
+        B1.getInstance().setScore(game.score);
         this.remove();
     }
 
@@ -99,10 +97,10 @@ class blueBox extends box {
     }
 
     action(game: game) {
-            game.size += game.rate;
-            game.boxes.forEach(box => {
-                box.length = game.size;
-            });
+        game.size += game.rate;
+        game.boxes.forEach(box => {
+            box.length = game.size;
+        });
         this.remove();
     }
 }
@@ -124,17 +122,17 @@ class user {
 }
 
 class game {
-    score: number;
-    speed: number;
-    moveSpace : number;
-    moveSpaceInt : number;
-    miss: number;
-    size: number;
-    player: user;
-    boxes: box[];
-    rate: number;
-    IntervalId: number;
-    private static Instanse: game;
+    score: number; // Score of green box clicked
+    speed: number; // Speed time of generating box
+    moveSpace: number; // Movement speed pixels
+    moveSpaceInt: number;// Interval move Space increase
+    miss: number; // Missed green boxes
+    size: number; // size of box
+    player: user; // User logged in
+    boxes: box[]; // Array of boxes
+    rate: number; // Rate of increase or decrease size of boxes
+    IntervalId: number;//Interval generating box
+    private static Instanse: game; // Game instance
     private constructor() {
 
     }
@@ -145,16 +143,17 @@ class game {
         return game.Instanse;
     }
     main() {
-        this.player = this.getCookie();
+        this.player = this.getCookie(); // Get player cookie
         if (this.player) {
-            A2.getInstance(this.player).show();
+            A2.getInstance(this.player).show();// If player exist
         } else {
-            A1.getInstance().show();
+            A1.getInstance().show(); // If player doesn't exist
         }
     }
     start() {
+        //initiate values and set interval of game level
         this.player = this.getCookie();
-        this.rate = 10;
+        this.rate = 5;
         this.size = 50;
         this.score = 0;
         this.miss = 0;
@@ -165,43 +164,39 @@ class game {
         } else if (this.player.difficult == level.medium) {
             this.speed = 1000;
         } else {
-            this.speed = 600;
+            this.speed = 800;
         }
         this.IntervalId = setInterval(() => this.generateBox(), this.speed);
-        this.moveSpaceInt = setInterval(()=> {
-            this.moveSpace +=1;
-        },15000);
+        this.moveSpaceInt = setInterval(() => {
+            if (this.player.difficult == level.easy) {
+                this.moveSpace += 0.5;
+            } else if (this.player.difficult == level.medium) {
+                this.moveSpace += 1;
+            } else {
+                this.moveSpace += 1.5;
+            }
+        }, 15000);
     }
 
-   /*initialize()
-    {
-        this.rate = 10;
-        this.size = 50;
-        this.score = 0;
-        this.miss = 0;
-        this.moveSpace = 1;
-    }*/
-
     endGame() {
-        clearInterval(this.IntervalId);
-        clearInterval(this.moveSpaceInt);
+        clearInterval(this.IntervalId); // stop creating boxes
+        clearInterval(this.moveSpaceInt); // stop moving boxes
         for (var i = 0; i < this.boxes.length; i++) {
-            this.boxes.pop().remove();
+            this.boxes.pop().remove(); // clear array of boxes
         }
         B1.getInstance().hide();
-        if (this.score >= this.player.highestScore)
-        {
+        if (this.score >= this.player.highestScore) { // if get a new highscore
             this.player.highestScore = this.score;
             document.cookie = JSON.stringify(this.player);
             C1.getInstance(this.player).show();
         }
         else
-            C2.getInstance(this.player,this.score).show();
+            C2.getInstance(this.player, this.score).show();
     }
 
     getCookie() {
         if (document.cookie) {
-            let cookie = JSON.parse(document.cookie);
+            let cookie = JSON.parse(document.cookie); // parse cookie to user object
             let player = new user(cookie.name, cookie.difficult, cookie.highestScore);
             return player;
         }
@@ -209,7 +204,7 @@ class game {
     }
 
     generateBox() {
-        let randomNumber: number = Math.random();
+        let randomNumber: number = Math.random(); // gereating box 
         if (randomNumber >= 0.9) {
             this.generateRedBox();
         } else if (randomNumber >= 0.8) {
@@ -222,25 +217,22 @@ class game {
         B1.getInstance().addBox(this.boxes[this.boxes.length - 1]);
     }
 
-
     generateGreenBox() {
-        let box = new greenBox(this.size, () => {
-            B1.getInstance().setScore(this.score);
-        });
+        let box = new greenBox(this.size);
         this.boxes.push(box);
     }
 
     generateBrownBox() {
-        let box = new brownBox(this.size, () => {});
+        let box = new brownBox(this.size);
         this.boxes.push(box);
     }
 
     generateRedBox() {
-        let box = new redBox(this.size, () => {});
+        let box = new redBox(this.size);
         this.boxes.push(box);
     }
     generateBlueBox() {
-        let box = new blueBox(this.size, () => {});
+        let box = new blueBox(this.size);
         this.boxes.push(box);
     }
 
@@ -254,7 +246,6 @@ class game {
     get missed() {
         return this.miss;
     }
-
 }
 window.onload = () => {
     game.getInstanse().main();

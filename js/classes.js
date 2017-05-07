@@ -1,9 +1,14 @@
 /// <reference path="views.ts" />
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 /**
  * classes
  */
@@ -14,23 +19,15 @@ var level;
     level[level["hard"] = 2] = "hard";
 })(level || (level = {}));
 var box = (function () {
-    function box(length, action) {
+    function box(length) {
         var _this = this;
         this.position = 0;
         this.obj = document.createElement('div');
-        this.obj.onclick = function () {
-            action();
-            _this.action(game.getInstanse());
-        };
+        this.obj.onclick = function () { return _this.action(game.getInstanse()); };
         this.length = length;
         this.obj.style.backgroundColor = this.Color;
         this.obj.style.position = 'absolute';
     }
-    Object.defineProperty(box.prototype, "Color", {
-        get: function () { },
-        enumerable: true,
-        configurable: true
-    });
     Object.defineProperty(box.prototype, "length", {
         set: function (length) {
             this.obj.style.width = length + "px";
@@ -65,7 +62,7 @@ var box = (function () {
 var greenBox = (function (_super) {
     __extends(greenBox, _super);
     function greenBox() {
-        _super.apply(this, arguments);
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     Object.defineProperty(greenBox.prototype, "Color", {
         get: function () {
@@ -76,6 +73,7 @@ var greenBox = (function (_super) {
     });
     greenBox.prototype.action = function (game) {
         game.score += 1;
+        B1.getInstance().setScore(game.score);
         this.remove();
     };
     return greenBox;
@@ -83,7 +81,7 @@ var greenBox = (function (_super) {
 var redBox = (function (_super) {
     __extends(redBox, _super);
     function redBox() {
-        _super.apply(this, arguments);
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     Object.defineProperty(redBox.prototype, "Color", {
         get: function () {
@@ -101,7 +99,7 @@ var redBox = (function (_super) {
 var brownBox = (function (_super) {
     __extends(brownBox, _super);
     function brownBox() {
-        _super.apply(this, arguments);
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     Object.defineProperty(brownBox.prototype, "Color", {
         get: function () {
@@ -122,7 +120,7 @@ var brownBox = (function (_super) {
 var blueBox = (function (_super) {
     __extends(blueBox, _super);
     function blueBox() {
-        _super.apply(this, arguments);
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     Object.defineProperty(blueBox.prototype, "Color", {
         get: function () {
@@ -161,18 +159,19 @@ var game = (function () {
         return game.Instanse;
     };
     game.prototype.main = function () {
-        this.player = this.getCookie();
+        this.player = this.getCookie(); // Get player cookie
         if (this.player) {
-            A2.getInstance(this.player).show();
+            A2.getInstance(this.player).show(); // If player exist
         }
         else {
-            A1.getInstance().show();
+            A1.getInstance().show(); // If player doesn't exist
         }
     };
     game.prototype.start = function () {
         var _this = this;
+        //initiate values and set interval of game level
         this.player = this.getCookie();
-        this.rate = 10;
+        this.rate = 5;
         this.size = 50;
         this.score = 0;
         this.miss = 0;
@@ -185,26 +184,26 @@ var game = (function () {
             this.speed = 1000;
         }
         else {
-            this.speed = 600;
+            this.speed = 800;
         }
         this.IntervalId = setInterval(function () { return _this.generateBox(); }, this.speed);
         this.moveSpaceInt = setInterval(function () {
-            _this.moveSpace += 1;
+            if (_this.player.difficult == level.easy) {
+                _this.moveSpace += 0.5;
+            }
+            else if (_this.player.difficult == level.medium) {
+                _this.moveSpace += 1;
+            }
+            else {
+                _this.moveSpace += 1.5;
+            }
         }, 15000);
     };
-    /*initialize()
-     {
-         this.rate = 10;
-         this.size = 50;
-         this.score = 0;
-         this.miss = 0;
-         this.moveSpace = 1;
-     }*/
     game.prototype.endGame = function () {
-        clearInterval(this.IntervalId);
-        clearInterval(this.moveSpaceInt);
+        clearInterval(this.IntervalId); // stop creating boxes
+        clearInterval(this.moveSpaceInt); // stop moving boxes
         for (var i = 0; i < this.boxes.length; i++) {
-            this.boxes.pop().remove();
+            this.boxes.pop().remove(); // clear array of boxes
         }
         B1.getInstance().hide();
         if (this.score >= this.player.highestScore) {
@@ -217,14 +216,14 @@ var game = (function () {
     };
     game.prototype.getCookie = function () {
         if (document.cookie) {
-            var cookie = JSON.parse(document.cookie);
+            var cookie = JSON.parse(document.cookie); // parse cookie to user object
             var player = new user(cookie.name, cookie.difficult, cookie.highestScore);
             return player;
         }
         return null;
     };
     game.prototype.generateBox = function () {
-        var randomNumber = Math.random();
+        var randomNumber = Math.random(); // gereating box 
         if (randomNumber >= 0.9) {
             this.generateRedBox();
         }
@@ -240,22 +239,19 @@ var game = (function () {
         B1.getInstance().addBox(this.boxes[this.boxes.length - 1]);
     };
     game.prototype.generateGreenBox = function () {
-        var _this = this;
-        var box = new greenBox(this.size, function () {
-            B1.getInstance().setScore(_this.score);
-        });
+        var box = new greenBox(this.size);
         this.boxes.push(box);
     };
     game.prototype.generateBrownBox = function () {
-        var box = new brownBox(this.size, function () { });
+        var box = new brownBox(this.size);
         this.boxes.push(box);
     };
     game.prototype.generateRedBox = function () {
-        var box = new redBox(this.size, function () { });
+        var box = new redBox(this.size);
         this.boxes.push(box);
     };
     game.prototype.generateBlueBox = function () {
-        var box = new blueBox(this.size, function () { });
+        var box = new blueBox(this.size);
         this.boxes.push(box);
     };
     Object.defineProperty(game.prototype, "missed", {
