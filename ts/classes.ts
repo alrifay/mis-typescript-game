@@ -1,7 +1,7 @@
 /// <reference path="views.ts" />
 
 /**
- * Created by Mohamed Kamal on 4/30/2017.
+ * classes
  */
 
 enum level {
@@ -9,7 +9,6 @@ enum level {
     medium,
     hard
 }
-
 
 abstract class box {
     obj: HTMLDivElement;
@@ -50,8 +49,8 @@ abstract class box {
     }
     remove() {
         clearInterval(this.id);
-        if(this.obj && this.obj.parentElement)
-        this.obj.parentElement.removeChild(this.obj);
+        if(this.obj)
+        this.obj.remove();
     }
 }
 
@@ -173,6 +172,15 @@ class game {
             this.moveSpace +=1;
         },15000);
     }
+
+   /*initialize()
+    {
+        this.rate = 10;
+        this.size = 50;
+        this.score = 0;
+        this.miss = 0;
+        this.moveSpace = 1;
+    }*/
 
     endGame() {
         clearInterval(this.IntervalId);

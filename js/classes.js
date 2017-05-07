@@ -1,16 +1,11 @@
 /// <reference path="views.ts" />
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
 /**
- * Deleted by Mohamed Al-Rifay on 4/30/2017.
+ * classes
  */
 var level;
 (function (level) {
@@ -31,6 +26,11 @@ var box = (function () {
         this.obj.style.backgroundColor = this.Color;
         this.obj.style.position = 'absolute';
     }
+    Object.defineProperty(box.prototype, "Color", {
+        get: function () { },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(box.prototype, "length", {
         set: function (length) {
             this.obj.style.width = length + "px";
@@ -57,15 +57,15 @@ var box = (function () {
     };
     box.prototype.remove = function () {
         clearInterval(this.id);
-        if (this.obj && this.obj.parentElement)
-            this.obj.parentElement.removeChild(this.obj);
+        if (this.obj)
+            this.obj.remove();
     };
     return box;
 }());
 var greenBox = (function (_super) {
     __extends(greenBox, _super);
     function greenBox() {
-        return _super !== null && _super.apply(this, arguments) || this;
+        _super.apply(this, arguments);
     }
     Object.defineProperty(greenBox.prototype, "Color", {
         get: function () {
@@ -83,7 +83,7 @@ var greenBox = (function (_super) {
 var redBox = (function (_super) {
     __extends(redBox, _super);
     function redBox() {
-        return _super !== null && _super.apply(this, arguments) || this;
+        _super.apply(this, arguments);
     }
     Object.defineProperty(redBox.prototype, "Color", {
         get: function () {
@@ -101,7 +101,7 @@ var redBox = (function (_super) {
 var brownBox = (function (_super) {
     __extends(brownBox, _super);
     function brownBox() {
-        return _super !== null && _super.apply(this, arguments) || this;
+        _super.apply(this, arguments);
     }
     Object.defineProperty(brownBox.prototype, "Color", {
         get: function () {
@@ -122,7 +122,7 @@ var brownBox = (function (_super) {
 var blueBox = (function (_super) {
     __extends(blueBox, _super);
     function blueBox() {
-        return _super !== null && _super.apply(this, arguments) || this;
+        _super.apply(this, arguments);
     }
     Object.defineProperty(blueBox.prototype, "Color", {
         get: function () {
@@ -192,6 +192,14 @@ var game = (function () {
             _this.moveSpace += 1;
         }, 15000);
     };
+    /*initialize()
+     {
+         this.rate = 10;
+         this.size = 50;
+         this.score = 0;
+         this.miss = 0;
+         this.moveSpace = 1;
+     }*/
     game.prototype.endGame = function () {
         clearInterval(this.IntervalId);
         clearInterval(this.moveSpaceInt);

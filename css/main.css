@@ -45,7 +45,6 @@ hr {
 }
 #game > div{
     box-shadow: 0px 0px 1px 1px gray;
-    transform: scale(1,1);
 }
 
 p {
@@ -63,4 +62,8 @@ p {
     text-align: center;
     width: 60%;
     margin: 0 auto;
+}
+.alert
+{
+    display: none;
 }

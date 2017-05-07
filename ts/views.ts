@@ -1,6 +1,6 @@
 /// <reference path="classes.ts" />
 /**
- * A1
+ * views
  */
 class view {
     view: HTMLDivElement;
@@ -22,12 +22,14 @@ class A1 extends view {
     private name: HTMLInputElement;
     private difficulty: HTMLSelectElement;
     private newStart: HTMLButtonElement;
+    private errorMessage : HTMLDivElement;
     private static instance: A1;
 
     static getInstance(): A1 {
         if (!A1.instance) {
             A1.instance = new A1();
         }
+        A1.instance.errorMessage.style.display = "none";
         return A1.instance;
     }
 
@@ -36,18 +38,21 @@ class A1 extends view {
         this.name = <HTMLInputElement>document.getElementById('name');
         this.difficulty = <HTMLSelectElement>document.getElementById('difficulty');
         this.newStart = <HTMLButtonElement>document.getElementById('newStart');
+        this.errorMessage = <HTMLDivElement> document.getElementById('errorMessage');
         this.newStart.onclick = () => this.newStartClick();
     }
 
     newStartClick() {
-        if(/^([a-zA-Z][a-z A-Z]+)$/.test(this.name.value)){
-        let player = new user(this.name.value, parseInt(this.difficulty.value), 0);
-        player.Cookie();
-        this.hide();
-        B1.getInstance().show();
-        game.getInstanse().start();
-    }else
-    alert("error");
+        if (/^([a-zA-Z][a-z A-Z]*)$/.test(this.name.value)) {
+            let player = new user(this.name.value, parseInt(this.difficulty.value), 0);
+            player.Cookie();
+            this.hide();
+            B1.getInstance().reset();
+            B1.getInstance().show();
+            game.getInstanse().start();
+        } else {
+            this.errorMessage.style.display = "block";
+        }
     }
 
 }
@@ -57,7 +62,7 @@ class A2 extends view {
     playerDifficulty: HTMLSpanElement;
     highestScore: HTMLSpanElement;
     forgetMe: HTMLButtonElement;
-    startAgian: HTMLButtonElement;
+    startAgain: HTMLButtonElement;
     private static instance: A2;
 
     private constructor() {
@@ -66,9 +71,9 @@ class A2 extends view {
         this.playerDifficulty = <HTMLSpanElement>document.getElementById("playerDifficulty");
         this.highestScore = <HTMLSpanElement>document.getElementById("highestScore");
         this.forgetMe = <HTMLButtonElement>document.getElementById("forgetMe");
-        this.startAgian = <HTMLButtonElement>document.getElementById("startAgian");
+        this.startAgain = <HTMLButtonElement>document.getElementById("startAgain");
         this.forgetMe.onclick = () => this.forgetMeClick();
-        this.startAgian.onclick = () => this.startAgianClick();
+        this.startAgain.onclick = () => this.startAgainClick();
     }
 
     public static getInstance(player: user) {
@@ -87,8 +92,9 @@ class A2 extends view {
         A1.getInstance().show();
     }
 
-    startAgianClick() {
+    startAgainClick() {
         this.hide();
+        B1.getInstance().reset();
         B1.getInstance().show();
         game.getInstanse().start();
     }
@@ -122,11 +128,19 @@ class B1 extends view {
         if (!this.instance) {
             this.instance = new B1();
         }
-        return this.instance;
+        return B1.instance;
     }
+
+    reset()
+    {
+        B1.instance.setScore(-1);
+        B1.instance.setMissed(0);
+    }
+
     setScore(score: number) {
         this.score.textContent = score + 1 + '';
     }
+
     setMissed(missedBoxes: number) {
         this.missedBoxes.textContent = missedBoxes + '';
     }
@@ -157,7 +171,7 @@ class C1 extends view {
 
     playAgainClick() {
         this.hide();
-        location.reload();
+        A2.getInstance(game.getInstanse().player).show();
     }
 }
 
@@ -189,6 +203,6 @@ class C2 extends view {
 
     playAgainClick() {
         this.hide();
-        location.reload();
+        A2.getInstance(game.getInstanse().player).show();
     }
 }

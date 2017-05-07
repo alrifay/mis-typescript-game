@@ -18,6 +18,10 @@
             <div class="form-group">
                 <label for="name">Your name:</label>
                 <input type="text" class="form-control" id="name" placeholder="Enter your Name">
+                <div class="alert alert-danger" id ='errorMessage'>
+                    <strong>Invalid Name!</strong>
+                </div>
+
             </div>
             <div class="form-group">
                 <label for="difficulty">Difficulty:</label>
@@ -38,7 +42,7 @@
             <p class="text-center">Selected diffculty is <span id="playerDifficulty"></span></p>
             <p class="text-center">High Score : <span id="highestScore"></span></p>
             <button id="forgetMe" class="btn btn-warning btn-block btn-lg">Forget Me</button>
-            <button id="startAgian" class="btn btn-primary btn-block btn-lg">Start</button>
+            <button id="startAgain" class="btn btn-primary btn-block btn-lg">Start</button>
         </div>
         <div id="B-1" style="display: none">
             <div id="game"></div>
