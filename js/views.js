@@ -118,11 +118,11 @@ var B1 = (function (_super) {
         return B1.instance;
     };
     B1.prototype.reset = function () {
-        B1.instance.setScore(-1);
+        B1.instance.setScore(0);
         B1.instance.setMissed(0);
     };
     B1.prototype.setScore = function (score) {
-        this.score.textContent = score + 1 + '';
+        this.score.textContent = score + '';
     };
     B1.prototype.setMissed = function (missedBoxes) {
         this.missedBoxes.textContent = missedBoxes + '';

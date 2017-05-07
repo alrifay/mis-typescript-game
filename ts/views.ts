@@ -135,12 +135,12 @@ class B1 extends view {
 
     reset()
     {
-        B1.instance.setScore(-1);
+        B1.instance.setScore(0);
         B1.instance.setMissed(0);
     }
 
     setScore(score: number) {
-        this.score.textContent = score + 1 + '';
+        this.score.textContent = score + '';
     }
 
     setMissed(missedBoxes: number) {
